@@ -12,3 +12,4 @@ C:\Users\Sean\MyApp\obj\Debug\net7.0\refint\MyApp.dll
 C:\Users\Sean\MyApp\obj\Debug\net7.0\MyApp.pdb
 C:\Users\Sean\MyApp\obj\Debug\net7.0\MyApp.genruntimeconfig.cache
 C:\Users\Sean\MyApp\obj\Debug\net7.0\ref\MyApp.dll
+C:\Users\Sean\MyApp\obj\Debug\net7.0\MyApp.csproj.AssemblyReference.cache

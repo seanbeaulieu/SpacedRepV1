@@ -1,4 +1,12 @@
-﻿ VocabManager vocabManager = new VocabManager();
+﻿ using Microsoft.Toolkit.Uwp.Notifications;
+ 
+ VocabManager vocabManager = new VocabManager();
+ // Requires Microsoft.Toolkit.Uwp.Notifications NuGet package version 7.0 or greater
+ToastContentBuilder toast = new ToastContentBuilder()
+    .AddArgument("action", "viewConversation")
+    .AddArgument("conversationId", 9813);
+    
+    
 
         while (true)
         {
@@ -19,6 +27,7 @@
                     string definition = Console.ReadLine();
                     vocabManager.AddVocab(term, definition);
                     Console.WriteLine("Word added to vocabulary!");
+                    
                     break;
 
                 case "2":
@@ -33,6 +42,10 @@
                 case "3":
                     Console.WriteLine("Exiting the program.");
                     return;
+
+                case "4":
+                    toast.Show();
+                    break;
 
                 default:
                     Console.WriteLine("Invalid choice. Please try again.");
