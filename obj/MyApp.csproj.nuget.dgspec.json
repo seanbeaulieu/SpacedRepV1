@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Sean\\MyApp\\MyApp.csproj": {}
+    "C:\\Users\\sbeau\\OneDrive\\Documents\\GitHub\\SpacedRepV1\\MyApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Sean\\MyApp\\MyApp.csproj": {
+    "C:\\Users\\sbeau\\OneDrive\\Documents\\GitHub\\SpacedRepV1\\MyApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Sean\\MyApp\\MyApp.csproj",
+        "projectUniqueName": "C:\\Users\\sbeau\\OneDrive\\Documents\\GitHub\\SpacedRepV1\\MyApp.csproj",
         "projectName": "MyApp",
-        "projectPath": "C:\\Users\\Sean\\MyApp\\MyApp.csproj",
-        "packagesPath": "C:\\Users\\Sean\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Sean\\MyApp\\obj\\",
+        "projectPath": "C:\\Users\\sbeau\\OneDrive\\Documents\\GitHub\\SpacedRepV1\\MyApp.csproj",
+        "packagesPath": "C:\\Users\\sbeau\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\sbeau\\OneDrive\\Documents\\GitHub\\SpacedRepV1\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Sean\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\sbeau\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0-windows10.0.17763.0"

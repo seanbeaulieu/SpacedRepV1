@@ -1,12 +1,7 @@
 ﻿ using Microsoft.Toolkit.Uwp.Notifications;
- 
- VocabManager vocabManager = new VocabManager();
- // Requires Microsoft.Toolkit.Uwp.Notifications NuGet package version 7.0 or greater
-ToastContentBuilder toast = new ToastContentBuilder()
-    .AddArgument("action", "viewConversation")
-    .AddArgument("conversationId", 9813);
     
-    
+VocabManager vocabManager = new VocabManager();
+ToastCreator toastCreator = new ToastCreator();
 
         while (true)
         {
@@ -14,6 +9,8 @@ ToastContentBuilder toast = new ToastContentBuilder()
             Console.WriteLine("1. Add Word");
             Console.WriteLine("2. List All Words");
             Console.WriteLine("3. Exit");
+            Console.WriteLine("4. Random Word");
+            Console.WriteLine("5. Remove Word");
             Console.Write("Enter your choice: ");
 
             string choice = Console.ReadLine();
@@ -43,8 +40,28 @@ ToastContentBuilder toast = new ToastContentBuilder()
                     Console.WriteLine("Exiting the program.");
                     return;
 
+                // Block which displays a random word as a toast notification
                 case "4":
+                    Vocab word = vocabManager.GetRandomVocab();
+                    var toast = new ToastContentBuilder()
+                    .AddArgument("conversationId", 9813)
+                    .AddText(word.Term)
+                    .AddText(word.Definition);
                     toast.Show();
+                    break;
+
+                case "5":
+                    Console.Write("Enter a word: ");
+                    string wordToRemove = Console.ReadLine();
+                    bool removed = vocabManager.RemoveVocab(new Vocab(wordToRemove, ""));
+                    if (removed)
+                    {
+                        Console.WriteLine("Word removed successfully!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Word not found!");
+                    }
                     break;
 
                 default:
