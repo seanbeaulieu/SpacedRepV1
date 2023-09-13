@@ -7,7 +7,7 @@ public class Vocab
     {
         if (other == null) return false;
         return Term.Equals(other.Term, StringComparison.OrdinalIgnoreCase)
-            && Definition.Equals(other.Definition, StringComparison.OrdinalIgnoreCase);
+            | Definition.Equals(other.Definition, StringComparison.OrdinalIgnoreCase);
     }
 
     public Vocab(string term, string definition)

@@ -2,6 +2,7 @@
     
 VocabManager vocabManager = new VocabManager();
 ToastCreator toastCreator = new ToastCreator();
+TimerService timerService = null;
 
         while (true)
         {
@@ -11,6 +12,7 @@ ToastCreator toastCreator = new ToastCreator();
             Console.WriteLine("3. Exit");
             Console.WriteLine("4. Random Word");
             Console.WriteLine("5. Remove Word");
+            Console.WriteLine("6. Start Timer");
             Console.Write("Enter your choice: ");
 
             string choice = Console.ReadLine();
@@ -53,7 +55,7 @@ ToastCreator toastCreator = new ToastCreator();
                 case "5":
                     Console.Write("Enter a word: ");
                     string wordToRemove = Console.ReadLine();
-                    bool removed = vocabManager.RemoveVocab(new Vocab(wordToRemove, ""));
+                    bool removed = vocabManager.RemoveVocab(new Vocab(wordToRemove, wordToRemove));
                     if (removed)
                     {
                         Console.WriteLine("Word removed successfully!");
@@ -64,9 +66,23 @@ ToastCreator toastCreator = new ToastCreator();
                     }
                     break;
 
+                case "6":
+                    if (timerService == null)
+                    {
+                        timerService = new TimerService(vocabManager);
+                        Console.WriteLine("Timer started!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Timer is already running!");
+                    }
+                    break;
+
                 default:
                     Console.WriteLine("Invalid choice. Please try again.");
                     break;
+
+                
             }
 
             Console.WriteLine(); // Add a newline for readability
