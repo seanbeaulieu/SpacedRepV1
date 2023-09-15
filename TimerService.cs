@@ -1,5 +1,6 @@
 using System;
 using System.Threading;
+using Microsoft.Toolkit.Uwp.Notifications;
 
 public class TimerService
 {
@@ -9,7 +10,7 @@ public class TimerService
     public TimerService(VocabManager manager)
     {
         vocabManager = manager;
-        timer = new Timer(TimerCallback, null, 0, 10000); // 30,000 milliseconds (10 seconds)
+        timer = new Timer(TimerCallback, null, 0, 10000); // 10,000 milliseconds (10 seconds)
     }
 
     private void TimerCallback(object state)

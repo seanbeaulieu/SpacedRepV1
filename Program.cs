@@ -1,8 +1,13 @@
-﻿ using Microsoft.Toolkit.Uwp.Notifications;
+﻿using Microsoft.Toolkit.Uwp.Notifications;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using Newtonsoft.Json;
     
 VocabManager vocabManager = new VocabManager();
 ToastCreator toastCreator = new ToastCreator();
 TimerService timerService = null;
+VocabStorage vocabStorage = new VocabStorage();
 
         while (true)
         {
