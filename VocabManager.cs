@@ -8,6 +8,12 @@ public class VocabManager
 {
     private readonly List<Vocab> vocabs = new List<Vocab>();
     private readonly object vocabLock = new object();
+    private readonly VocabStorage vocabStorage = new VocabStorage();
+
+    public VocabManager()
+    {
+        vocabs = vocabStorage.Load();
+    }
 
     // Add a new vocabulary word to the list
     public void AddVocab(string term, string definition)
@@ -15,7 +21,8 @@ public class VocabManager
         Vocab vocab = new Vocab(term, definition);
         lock (vocabLock)
         {
-            vocabs.Add(vocab);
+            List<Vocab> vocabList = new List<Vocab> { vocab };
+            vocabStorage.SaveVocab(vocabList);
         }
     }
 
@@ -25,7 +32,7 @@ public class VocabManager
         lock (vocabLock)
         {
             // Find the vocab with matching Term and Definition
-            Vocab matchingVocab = vocabs.FirstOrDefault(v => v.Equals(vocabToRemove));
+            Vocab? matchingVocab = vocabs.FirstOrDefault(v => v.Equals(vocabToRemove));
 
             if (matchingVocab != null)
             {
@@ -38,13 +45,18 @@ public class VocabManager
     }
     public List<Vocab> GetAllVocab()
     {
-        return vocabs;
+        return vocabStorage.Load();
     }
 
     public Vocab GetRandomVocab() 
     {
+        // Get all vocabs present in vocabulary.json
+        List<Vocab> cur_vocabs = vocabStorage.Load();
+
+        // Select random vocab from the list
         Random random = new Random();
-        int random_idx = random.Next(vocabs.Count);
-        return vocabs[random_idx]; 
+        int random_idx = random.Next(cur_vocabs.Count);
+        
+        return cur_vocabs[random_idx]; 
     }
 }

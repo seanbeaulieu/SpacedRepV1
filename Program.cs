@@ -6,7 +6,7 @@ using Newtonsoft.Json;
     
 VocabManager vocabManager = new VocabManager();
 ToastCreator toastCreator = new ToastCreator();
-TimerService timerService = null;
+TimerService? timerService = null;
 VocabStorage vocabStorage = new VocabStorage();
 
         while (true)
@@ -20,15 +20,15 @@ VocabStorage vocabStorage = new VocabStorage();
             Console.WriteLine("6. Start Timer");
             Console.Write("Enter your choice: ");
 
-            string choice = Console.ReadLine();
+            string? choice = Console.ReadLine();
 
             switch (choice)
             {
                 case "1":
                     Console.Write("Enter a word: ");
-                    string term = Console.ReadLine();
+                    string? term = Console.ReadLine();
                     Console.Write("Enter its definition: ");
-                    string definition = Console.ReadLine();
+                    string? definition = Console.ReadLine();
                     vocabManager.AddVocab(term, definition);
                     Console.WriteLine("Word added to vocabulary!");
                     
@@ -59,7 +59,7 @@ VocabStorage vocabStorage = new VocabStorage();
 
                 case "5":
                     Console.Write("Enter a word: ");
-                    string wordToRemove = Console.ReadLine();
+                    string? wordToRemove = Console.ReadLine();
                     bool removed = vocabManager.RemoveVocab(new Vocab(wordToRemove, wordToRemove));
                     if (removed)
                     {

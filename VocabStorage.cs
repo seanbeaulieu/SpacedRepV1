@@ -11,15 +11,52 @@ public class VocabStorage
     {
         if (File.Exists(FilePath))
         {
-            string json = File.ReadAllText(FilePath);
-            return JsonConvert.DeserializeObject<List<Vocab>>(json);
+            string jsonVocab = File.ReadAllText(FilePath);
+            return JsonConvert.DeserializeObject<List<Vocab>>(jsonVocab);
         }
         return new List<Vocab>();
     }
 
-    public void Save(List<Vocab> vocabulary)
+    public void SaveVocab(List<Vocab> vocabularies)
     {
-        string json = JsonConvert.SerializeObject(vocabulary, Formatting.Indented);
-        File.WriteAllText(FilePath, json);
+            List<Vocab> cur_vocabularies = Load();
+            // append vocabularies to cur_vocabularies
+            cur_vocabularies.AddRange(vocabularies);
+            string json = JsonConvert.SerializeObject(cur_vocabularies, Formatting.Indented);
+            File.WriteAllText(FilePath, json);
+    }
+
+
+    // Remove a vocabulary word from the list
+    public void Remove(Vocab vocabToRemove)
+    {
+    // Create a temporary file path
+    string tempFilePath = Path.GetTempFileName();
+
+    // Open the input file for reading
+    using (StreamReader reader = new StreamReader(FilePath))
+    {
+        // Open the temporary file for writing
+        using (StreamWriter writer = new StreamWriter(tempFilePath))
+        {
+            string line;
+            while ((line = reader.ReadLine()) != null)
+            {
+                // Deserialize the line into a Vocab object
+                Vocab vocab = JsonConvert.DeserializeObject<Vocab>(line);
+
+                // Check if the vocab matches the one to remove
+                if (!vocab.Equals(vocabToRemove))
+                {
+                    // Write the line to the temporary file
+                    writer.WriteLine(line);
+                }
+            }
+        }
+    }
+
+    // Replace the original file with the temporary file
+    File.Delete(FilePath);
+    File.Move(tempFilePath, FilePath);
     }
 }
