@@ -31,18 +31,26 @@ public class VocabManager
     {
         lock (vocabLock)
         {
-            // Find the vocab with matching Term and Definition
-            Vocab? matchingVocab = vocabs.FirstOrDefault(v => v.Equals(vocabToRemove));
 
+            // Get all vocabs present in vocabulary.json
+            List<Vocab> cur_vocabs = vocabStorage.Load();
+
+            // Find the vocab with matching Term and Definition
+            Vocab? matchingVocab = cur_vocabs.FirstOrDefault(v => v.Equals(vocabToRemove));
+
+            // Check if the vocab was found
             if (matchingVocab != null)
             {
-                vocabs.Remove(matchingVocab);
+                vocabStorage.WipeVocabs();
+                cur_vocabs.Remove(matchingVocab);
+                vocabStorage.SaveVocab(cur_vocabs);
                 return true; // Vocabulary word removed successfully
             }
 
             return false; // Vocabulary word not found
         }
     }
+    
     public List<Vocab> GetAllVocab()
     {
         return vocabStorage.Load();

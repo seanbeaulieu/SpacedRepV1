@@ -26,37 +26,42 @@ public class VocabStorage
             File.WriteAllText(FilePath, json);
     }
 
+    public void WipeVocabs()
+    {
+        File.WriteAllText(FilePath, "[]");
+    }
+
 
     // Remove a vocabulary word from the list
     public void Remove(Vocab vocabToRemove)
     {
-    // Create a temporary file path
-    string tempFilePath = Path.GetTempFileName();
+        // Create a temporary file path
+        string tempFilePath = Path.GetTempFileName();
 
-    // Open the input file for reading
-    using (StreamReader reader = new StreamReader(FilePath))
-    {
-        // Open the temporary file for writing
-        using (StreamWriter writer = new StreamWriter(tempFilePath))
+        // Open the input file for reading
+        using (StreamReader reader = new StreamReader(FilePath))
         {
-            string line;
-            while ((line = reader.ReadLine()) != null)
+            // Open the temporary file for writing
+            using (StreamWriter writer = new StreamWriter(tempFilePath))
             {
-                // Deserialize the line into a Vocab object
-                Vocab vocab = JsonConvert.DeserializeObject<Vocab>(line);
-
-                // Check if the vocab matches the one to remove
-                if (!vocab.Equals(vocabToRemove))
+                string line;
+                while ((line = reader.ReadLine()) != null)
                 {
-                    // Write the line to the temporary file
-                    writer.WriteLine(line);
+                    // Deserialize the line into a Vocab object
+                    Vocab vocab = JsonConvert.DeserializeObject<Vocab>(line);
+
+                    // Check if the vocab matches the one to remove
+                    if (!vocab.Equals(vocabToRemove))
+                    {
+                        // Write the line to the temporary file
+                        writer.WriteLine(line);
+                    }
                 }
             }
         }
-    }
 
-    // Replace the original file with the temporary file
-    File.Delete(FilePath);
-    File.Move(tempFilePath, FilePath);
+        // Replace the original file with the temporary file
+        File.Delete(FilePath);
+        File.Move(tempFilePath, FilePath);
     }
 }

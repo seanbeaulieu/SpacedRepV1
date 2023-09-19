@@ -1,8 +1,6 @@
  using Microsoft.Toolkit.Uwp.Notifications;
  
-
  // Requires Microsoft.Toolkit.Uwp.Notifications NuGet package version 7.0 or greater
-
 
 public class ToastCreator
 {
@@ -16,6 +14,13 @@ public class ToastCreator
     public ToastCreator AddArgument(string key, string value)
     {
         this.toast.AddArgument(key, value);
+        return this;
+    }
+
+    public ToastCreator PopulateNotification(string term, string definition)
+    {
+        this.toast.AddText(term);
+        this.toast.AddText(definition);
         return this;
     }
 }
